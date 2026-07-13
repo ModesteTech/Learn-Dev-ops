@@ -38,6 +38,6 @@ with open("sites.json","r") as file:
         site=Site(url)
         site.verifier()
         print(site.get_status())
-        resultat.append({"url:",url,"statut",site.get_status()})
+        resultat.append({"url:":url,"statut":site.get_status()})
 with open("resultats.json","w") as file :
     json.dump(resultat,file)
