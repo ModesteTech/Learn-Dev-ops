@@ -26,7 +26,7 @@ if args.verbose:
 else:
     if args.operation == "addition":
         print("Resultat :",args.nombre1 + args.nombre2)
-    elif args.operation == "sostraction":
+    elif args.operation == "soustraction":
         print("Resultat :",args.nombre1 - args.nombre2)
     elif args.operation == "multiplication":
         print("Resultat :",args.nombre1 * args.nombre2)
