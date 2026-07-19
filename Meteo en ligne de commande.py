@@ -21,9 +21,13 @@ logging.basicConfig(filename="Meteo.log", level=logging.DEBUG ,format='%(asctime
 
 
         # CREATION DU DICTIONNAIRE
-donnees={
+if os.path.exists("infos_meteo.json"):
+    with open ("infos_meteo.json","r") as file :
+        donnees = json.load(file)
+else:
+    donnees={
 
-}
+    }
         #   FONCTIONS
 
 # Creation d'une erreur personalisee
@@ -52,17 +56,18 @@ def verifier_la_meteo(ville):
                 logging.info(f"Un utilisateur a consulte la meteo dans la ville de {ville} : {result} {args.unite}")
             else:
                 raise UniteError ("Mauvaise unite")
-            return result
+            return f"La meteo dans la ville de {args.ville} est : {result}"
     except (requests.exceptions.ConnectionError,requests.exceptions.Timeout,VilleError,UniteError) as e:
         logging.error(e,exc_info=True)
         return f"Erreur : {e}"
 
+        # APPEL DE LA FONCTION
+verifier = verifier_la_meteo(args.ville)
 
   #   ENREGISTRE FICHIER JSON
-with open ("infos_meteo.json","w+") as f:
+with open ("infos_meteo.json","w") as f:
         json.dump(donnees,f)
 print(donnees)
 
-
-verifier = verifier_la_meteo(args.ville)
+print(verifier)
 
